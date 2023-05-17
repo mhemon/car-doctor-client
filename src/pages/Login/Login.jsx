@@ -1,22 +1,25 @@
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import img from '../../assets/images/login/login.svg'
 import { useContext } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
+import SocialLogin from '../Shared/SocialLogin/SocialLogin';
 
 const Login = () => {
 
     const { signIn } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || "/";
 
     const handleLogin = event => {
         event.preventDefault();
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(name, email, password)
         signIn(email, password)
-            .then(result => {
-                const user = result.user;
-                console.log(user);
+            .then(() => {
+                navigate(from, { replace: true });
             })
             .catch(error => console.log(error));
     }
@@ -51,7 +54,11 @@ const Login = () => {
                             </div>
                         </form>
                         <p className='my-4 text-center'>New to Car Doctors <Link className='text-orange-600 font-bold' to="/signup">Sign Up</Link> </p>
+                        <div className='text-center'>
+                        <SocialLogin></SocialLogin>
+                        </div>
                     </div>
+                    
                 </div>
             </div>
         </div>

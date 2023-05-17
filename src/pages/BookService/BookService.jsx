@@ -26,7 +26,7 @@ const BookService = () => {
 
         console.log(booking);
 
-        fetch('http://localhost:5000/bookings', {
+        fetch('https://car-doctor-server-amber-three.vercel.app/bookings', {
             method: 'POST', 
             headers: {
                 'content-type': 'application/json'
@@ -70,7 +70,7 @@ const BookService = () => {
                         <label className="label">
                             <span className="label-text">Due amount</span>
                         </label>
-                        <input type="text" defaultValue={'$'+ price} className="input input-bordered" />
+                        <input type="text" defaultValue={'$'+ price} className="input input-bordered" disabled/>
                     </div>
                 </div>
                 <div className="form-control mt-6">
